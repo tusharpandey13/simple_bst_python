@@ -18,12 +18,12 @@ class tree:
     def _add(self, val, node):
         if(val < node.val):
             if(node.l != None):
-                self._add(val = val, node = node.l)
+                self._add(val=val, node=node.l)
             else:
                 node.l = Node(val)
-        else: # >=
+        else:  # >=
             if(node.r != None):
-                self._add(val = val, node = node.r)
+                self._add(val=val, node=node.r)
             else:
                 node.r = Node(val)
 
@@ -37,13 +37,13 @@ class tree:
         if (node == None) or (node.val == val):
             return node
         # else:
-        if (val < node.val): # and (node.l != None):
+        if (val < node.val):  # and (node.l != None):
             return self._find(val, node.l)
-        #elif (val > node.val) : # and (node.r != None):
+        # elif (val > node.val) : # and (node.r != None):
         return self._find(val, node.r)
-            # else:
-            #     printinorder('fe')
-            #     return None
+        # else:
+        #     printinorder('fe')
+        #     return None
 
     def printinorderold(self):
         self._printinorderold(self.root)
@@ -115,15 +115,14 @@ class tree:
         return self._haspathsum(n, node.l) or self._haspathsum(n, node.r)
 
     def printpaths(self):
-        pass
+        print(self._getpaths(self.root))
 
     def _getpaths(self, node):
         if node == None:
-            return None
+            return [[]]  # [[], []]
         else:
-            return [node.l, node.r]
-
-
+            # return [node.l, node.r]
+            return [([node.val] + x[::-1]) for x in (self._getpaths(node.l) + self._getpaths(node.r))]
 
 
 t1 = tree()
@@ -138,3 +137,4 @@ t1.add(3)
 # print(t1.size())
 # t1.printpostorder()
 # print(t1.maxdepth())
+print(t1.printpaths())

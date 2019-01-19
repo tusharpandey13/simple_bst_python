@@ -118,19 +118,25 @@ class tree:
         print(self._getpaths(self.root))
 
     def _getpaths(self, node):
-        if node == None:
-            print('[[]]')
-            return [[]]  # [[], []]
-        else:
-            # return [node.l, node.r]
-            tmpl = [[]]
+        # if node == None:
+        #     print('[[]]')
+        #     return [[]]  # [[], []]
+        # else:
+        if node != None:
             if not self._isleaf(node):
-                tmpl = [[node.val] + x for x in (self._getpaths(node.l) + self._getpaths(node.r))]
+                return [[node.val] + x for x in (self._getpaths(node.l) + self._getpaths(node.r))]
             else:
-                tmpl = [[node.val]]
-            print(tmpl)
-            return tmpl
+                return [[node.val]]
 
+    def mirror(self):
+        self._mirror(self.root)
+
+    def _mirror(self, node):
+        if node != None:
+            if not self._isleaf(node):
+                self._mirror(node.l)
+                self._mirror(node.r)
+                node.l, node.r = node.r, node.l
 
 t1 = tree()
 t1.add(4)
@@ -144,4 +150,5 @@ t1.add(3)
 # print(t1.size())
 # t1.printpostorder()
 # print(t1.maxdepth())
-print(t1.printpaths())
+# t1.printpaths()
+# t1.mirror()

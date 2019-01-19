@@ -119,10 +119,17 @@ class tree:
 
     def _getpaths(self, node):
         if node == None:
+            print('[[]]')
             return [[]]  # [[], []]
         else:
             # return [node.l, node.r]
-            return [([node.val] + x[::-1]) for x in (self._getpaths(node.l) + self._getpaths(node.r))]
+            tmpl = [[]]
+            if not self._isleaf(node):
+                tmpl = [[node.val] + x for x in (self._getpaths(node.l) + self._getpaths(node.r))]
+            else:
+                tmpl = [[node.val]]
+            print(tmpl)
+            return tmpl
 
 
 t1 = tree()

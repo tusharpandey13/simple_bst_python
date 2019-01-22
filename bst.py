@@ -4,6 +4,16 @@ class Node:
         self.r = None
         self.l = None
 
+    def __eq__(self, other):
+        if (self is other): #if both None
+            return True
+        elif (not self is None) and (not other is None):
+            return (self.val == other.val) and (self.l == other.l) and (self.r == other.r)
+        else:
+            return False
+
+
+
 
 class tree:
     def __init__(self):
@@ -138,12 +148,21 @@ class tree:
                 self._mirror(node.r)
                 node.l, node.r = node.r, node.l
 
+    def __eq__(self, other):
+        return self.root == other.root
+
+    def _equal(self, node1, node2):
+        # return node1 == node2
+        pass
+
+
 t1 = tree()
 t1.add(4)
 t1.add(2)
 t1.add(5)
 t1.add(1)
 t1.add(3)
+
 # printinorder(t1.find(5))
 # t1.printinorderold()
 # t1.printinorder()

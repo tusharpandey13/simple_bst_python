@@ -12,6 +12,17 @@ class Node:
         else:
             return False
 
+    def __str__(self):
+        ts1 = ''
+        ts2 = ''
+        if self.l != None:
+            ts1 = ', L = ' + str(self.l)
+        if self.r != None:
+            ts2 = ', R = ' + str(self.r)
+
+        s = 'Node{Value = ' + str(self.val) + ts1 + ts2 + '}'
+        return s
+
 
 
 
@@ -151,9 +162,24 @@ class tree:
     def __eq__(self, other):
         return self.root == other.root
 
-    def _equal(self, node1, node2):
-        # return node1 == node2
-        pass
+    def min(self):
+        return self._getmin(self.root)
+
+    def _getmin(self, node):
+        if node.l == None:
+            return node.val
+        else:
+            return self._getmin(node.l)
+
+    def max(self):
+        return self._getmax(self.root)
+
+    def _getmax(self, node):
+        if node.r == None:
+            return node.val
+        else:
+            return self._getmax(node.r)
+
 
 
 t1 = tree()
@@ -162,12 +188,15 @@ t1.add(2)
 t1.add(5)
 t1.add(1)
 t1.add(3)
+t1.add(6)
+t1.add(7)
 
-# printinorder(t1.find(5))
-# t1.printinorderold()
-# t1.printinorder()
+ # t1.printinorderold()
+t1.printinorder()
 # print(t1.size())
 # t1.printpostorder()
 # print(t1.maxdepth())
 # t1.printpaths()
 # t1.mirror()
+# print(t1.find(4))
+# print(t1.max())
